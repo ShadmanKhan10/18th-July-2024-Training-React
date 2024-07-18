@@ -1,39 +1,59 @@
-import React, { useState, useEffect } from "react";
+// USE EFFECT HOOK PRACTICE
 
-function UserProfile() {
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
+// import React, { useState, useEffect } from "react";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users/1"
-        );
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+// function UserProfile() {
+//   const [userData, setUserData] = useState(null);
+//   const [loading, setLoading] = useState(true);
 
-    fetchData();
-  }, []); // Empty dependency array means this effect runs only once.
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch(
+//           "https://jsonplaceholder.typicode.com/users/1"
+//         );
+//         const data = await response.json();
+//         setUserData(data);
+//       } catch (error) {
+//         console.error("Error fetching user data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+//     fetchData();
+//   }, []); // Empty dependency array means this effect runs only once.
 
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   return (
+//     <div>
+//       <h1>User Profile</h1>
+//       <p>Name: {userData.name}</p>
+//       <p>Username: {userData.username}</p>
+//       <p>Email: {userData.email}</p>
+//     </div>
+//   );
+// }
+
+// export default UserProfile;
+
+//------------------------------------------------------------------------------------------
+
+//CONDITIONAL RENDERING PACTICE
+
+import React from "react";
+
+export default function UserProfile({ setStatus }) {
+  const handleLogOut = () => {
+    setStatus(false);
+  };
   return (
     <div>
-      <h1>User Profile</h1>
-      <p>Name: {userData.name}</p>
-      <p>Username: {userData.username}</p>
-      <p>Email: {userData.email}</p>
+      <p>You are logged In</p>
+      <button onClick={handleLogOut}>Logout</button>
     </div>
   );
 }
-
-export default UserProfile;
